@@ -20,7 +20,7 @@ def fillList(ulist, html):   #用beautifulSoup爬取页面 非脚本页面
         if isinstance(tr,bs4.element.Tag):    #判断是否为标签
             tds = tr.find_all('td')
             ulist.append([tds[0].string, tds[1].string, tds[2].string, tds[3].string])
-def parsePage(ulist, html):
+def parsePage(ulist, html):      #用re正则表达式爬去页面，用于脚本页面
     try:
         plt = re.findall(r'\"view_price\"\:\"[\d\.]*\"',html.text)
         tlt = re.findall(r'\"raw_title\"\:\".*?\"',html.text)   #*?为最小匹配
