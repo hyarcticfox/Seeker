@@ -22,14 +22,14 @@ class StocksSpider(scrapy.Spider):
                 continue
     def parseStock(self, response):
         infoDict = {}
-        stockInfo = response.css('.stock-bets') #这个点.表示 选择所有class包含stock-bets的节点
+        stockInfo = response.css('.stock-bets') #这个点.表示 选择所有class stock-bets的节点  如果为id, 则为#
         name = stockInfo.css('.bets-name').extract()[0]
         keyList = stockInfo.css('dt').extract()
-        valueList = stockInfo.css('dd').extract()
+        valueList = stockInfo.css('dd').extract()   
         for i in range(len(keyList):
             key = re.findall(r'>.*</dt>',keyList[i])[0][1:-5]
             try:
-                val = re.findall(r'\d+\.?.*</dd>',valueList[i])[0][1:-5]
+                val = re.findall(r'\d+\.?.*</dd>',valueList[i])[0][1:-5]   #\d+一个或多个数字 \.?对.匹配0次或1次  .*任意字符匹配0次或多次
             except:
                 val = '--'
             infoDict[key] = val
